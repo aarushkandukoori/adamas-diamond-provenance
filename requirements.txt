@@ -1,0 +1,5 @@
+# Pinned for bit-exact reproducibility (Python 3.12).
+# LAPACK version differences across BLAS backends can shift eigendecomposition
+# sign conventions in the PCA/LDA stage; exact reproduction assumes this stack.
+numpy==2.4.4
+matplotlib==3.10.8
