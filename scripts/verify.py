@@ -49,6 +49,19 @@ def _match(got, exp) -> bool:
     return _diff(got, exp) <= TOL
 
 
+def _load_committed() -> dict:
+    """Load results.json as committed in HEAD (falls back to the working tree)."""
+    try:
+        raw = subprocess.check_output(
+            ["git", "-C", str(ROOT), "show", "HEAD:results/results.json"],
+            stderr=subprocess.DEVNULL,
+        )
+        return json.loads(raw)
+    except (subprocess.CalledProcessError, FileNotFoundError, json.JSONDecodeError):
+        with open(COMMITTED_PATH) as f:
+            return json.load(f)
+
+
 def main() -> int:
     # Inherit / force single-threaded BLAS for bit-exact linear algebra.
     for key, val in (
@@ -65,8 +78,7 @@ def main() -> int:
     ):
         os.environ.setdefault(key, val)
 
-    with open(COMMITTED_PATH) as f:
-        committed = json.load(f)
+    committed = _load_committed()
 
     print("Running simulation ...", flush=True)
     proc = subprocess.run(
