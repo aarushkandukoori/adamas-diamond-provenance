@@ -3,24 +3,30 @@ name: reproduce
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 jobs:
   verify:
-    runs-on: ubuntu-latest
-    # Fixed userland so LAPACK/OpenBLAS kernels match across GitHub host CPUs.
-    container: python:3.12.8-bookworm
+    runs-on: ubuntu-22.04
     env:
       OPENBLAS_NUM_THREADS: "1"
       OMP_NUM_THREADS: "1"
       MKL_NUM_THREADS: "1"
       NUMEXPR_NUM_THREADS: "1"
       VECLIB_MAXIMUM_THREADS: "1"
-      OPENBLAS_CORETYPE: "HASWELL"
+      PYTHONHASHSEED: "0"
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
       - name: Install dependencies
-        run: pip install --no-cache-dir -r requirements.txt
+        run: |
+          pip install -r requirements.txt
+          python -c "import numpy as np; np.show_config()"
 
       - name: Bit-exact verification
         run: python scripts/verify.py
@@ -31,4 +37,3 @@ jobs:
         with:
           name: results-fresh
           path: results/results.json
-
