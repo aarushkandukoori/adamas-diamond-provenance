@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ADAMAS — Physical Keys for Diamond Provenance</title>
+  <meta name="description" content="ADAMAS binds a diamond’s crystallographic signature to its on-chain provenance. Possession of the stone is the key." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/demo.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="top">
+    <a class="logo" href="#stage" data-seek="0">ADAMAS</a>
+    <nav class="top-nav" aria-label="Primary">
+      <button type="button" class="nav-link" data-seek="1">Problem</button>
+      <button type="button" class="nav-link" data-seek="2">Scan</button>
+      <button type="button" class="nav-link" data-seek="3">Key</button>
+      <button type="button" class="nav-link" data-seek="4">Chain</button>
+    </nav>
+  </header>
+
+  <main id="stage" class="stage" aria-live="polite">
+    <!-- Scene 0: Title -->
+    <section class="scene is-active" data-scene="0" data-duration="9000">
+      <div class="scene-visual" aria-hidden="true">
+        <canvas id="crystal" width="1200" height="1200"></canvas>
+        <div class="light-sweep"></div>
+      </div>
+      <div class="scene-copy">
+        <p class="brand">ADAMAS</p>
+        <h1>The stone <em>is</em> the key.</h1>
+        <p class="lede">Cryptographic provenance that only the physical diamond can unlock.</p>
+        <div class="cta-row">
+          <button type="button" class="btn-play" id="playMain" aria-label="Play demo">
+            <span class="btn-play-icon" aria-hidden="true"></span>
+            Play the story
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scene 1: Binding gap -->
+    <section class="scene" data-scene="1" data-duration="8000">
+      <div class="scene-visual" aria-hidden="true">
+        <div class="gap-diagram">
+          <div class="gap-node gap-stone">
+            <span class="gap-facet"></span>
+            <span class="gap-label">Physical stone</span>
+          </div>
+          <div class="gap-break">
+            <span class="gap-line"></span>
+            <span class="gap-x">✕</span>
+            <span class="gap-line"></span>
+          </div>
+          <div class="gap-node gap-chain">
+            <span class="gap-blocks">
+              <i></i><i></i><i></i>
+            </span>
+            <span class="gap-label">Ledger record</span>
+          </div>
+        </div>
+      </div>
+      <div class="scene-copy">
+        <p class="scene-kicker">01 — The binding gap</p>
+        <h2>Ledgers remember claims.<br />Not stones.</h2>
+        <p class="lede">A lab asserts a match. The chain records the assertion. Swap the diamond, compromise the scanner, or replay a scan—and the ledger still looks perfect.</p>
+      </div>
+    </section>
+
+    <!-- Scene 2: Scan inclusions -->
+    <section class="scene" data-scene="2" data-duration="9000">
+      <div class="scene-visual" aria-hidden="true">
+        <svg class="constellation" viewBox="0 0 400 400" role="presentation">
+          <defs>
+            <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#9fd4c8" stop-opacity="0.45" />
+              <stop offset="100%" stop-color="#9fd4c8" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+          <circle class="scan-ring" cx="200" cy="200" r="150" />
+          <circle class="scan-ring delay" cx="200" cy="200" r="110" />
+          <g class="inclusion-cloud"></g>
+        </svg>
+      </div>
+      <div class="scene-copy">
+        <p class="scene-kicker">02 — Inclusion map</p>
+        <h2>Every diamond has a private sky.</h2>
+        <p class="lede">Internal inclusions form a rigid constellation—unique, measurable, and still there after a re-polish moves the surface.</p>
+      </div>
+    </section>
+
+    <!-- Scene 3: Key derivation -->
+    <section class="scene" data-scene="3" data-duration="9000">
+      <div class="scene-visual" aria-hidden="true">
+        <div class="key-stream">
+          <div class="key-bits" id="keyBits"></div>
+          <div class="key-vault">
+            <div class="vault-ring"></div>
+            <div class="vault-core">KEY</div>
+          </div>
+        </div>
+      </div>
+      <div class="scene-copy">
+        <p class="scene-kicker">03 — ADAMAS protocol</p>
+        <h2>From defects to a cryptographic key.</h2>
+        <p class="lede">Screen with an alignment-free embedding. Register the point set. Seal it in a fuzzy vault—so only a fresh measurement of the same stone unlocks provenance.</p>
+      </div>
+    </section>
+
+    <!-- Scene 4: On-chain -->
+    <section class="scene" data-scene="4" data-duration="10000">
+      <div class="scene-visual" aria-hidden="true">
+        <div class="chain-flow">
+          <div class="stone-token">
+            <svg viewBox="0 0 80 80" class="mini-diamond"><polygon points="40,6 72,32 40,74 8,32" /></svg>
+          </div>
+          <div class="flow-arrow"></div>
+          <div class="chain-blocks">
+            <div class="cblock" data-i="0"><span>enroll</span></div>
+            <div class="cblock" data-i="1"><span>attest</span></div>
+            <div class="cblock" data-i="2"><span>transfer</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="scene-copy">
+        <p class="scene-kicker">04 — Provenance</p>
+        <h2>Possession required.<br />Every operation.</h2>
+        <p class="lede">Enroll, attest, transfer—each step needs the physical stone. The ledger finally binds to something you can hold.</p>
+        <div class="cta-row end-cta">
+          <a class="btn-play" href="https://github.com/aarushkandukoori/adamas-diamond-provenance">
+            <span class="btn-play-icon repo" aria-hidden="true"></span>
+            View the research
+          </a>
+          <button type="button" class="btn-ghost" data-seek="0">Replay</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="player" role="group" aria-label="Demo playback">
+    <button type="button" class="player-btn" id="togglePlay" aria-label="Play">
+      <span class="icon-play" id="playIcon"></span>
+    </button>
+    <div class="timeline" id="timeline" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+      <div class="timeline-track">
+        <div class="timeline-progress" id="progress"></div>
+        <div class="timeline-chapters" id="chapters"></div>
+      </div>
+    </div>
+    <div class="player-meta">
+      <span id="sceneLabel">Title</span>
+      <span id="timeLabel">0:00</span>
+    </div>
+  </footer>
+
+  <script src="js/demo.js"></script>
+</body>
+</html>
