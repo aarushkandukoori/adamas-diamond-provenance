@@ -14,7 +14,7 @@ Distributed ledgers give diamond provenance systems tamper-evident records, but 
 | `pl_gate_acc` | 0.9978750000000001 |
 | `lab_admitted` / `lab_n` | 200 / 200 |
 | `G_for_128` | 22 |
-| `vault_choice` | C=10000, D=8, sec=90.16602947289002, unlock=0.9700447419773197 |
+| `vault_choice` | C=10000, D=8, sec=90.16602947289002, unlock=0.9699112511799476 |
 
 ## Quickstart
 
