@@ -24,3 +24,11 @@ jobs:
 
       - name: Bit-exact verification
         run: python scripts/verify.py
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: results-fresh
+          path: results/results.json
+

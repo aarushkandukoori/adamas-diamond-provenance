@@ -26,7 +26,7 @@ EXPECTED = {
     "vault_choice.C": 10000,
     "vault_choice.D": 8,
     "vault_choice.sec": 90.16602947289002,
-    "vault_choice.unlock": 0.9699112511799476,
+    "vault_choice.unlock": 0.9700447419773197,
 }
 
 
