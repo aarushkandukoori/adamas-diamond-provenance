@@ -14,8 +14,6 @@ jobs:
       NUMEXPR_NUM_THREADS: "1"
       VECLIB_MAXIMUM_THREADS: "1"
       PYTHONHASHSEED: "0"
-      # Force a common SIMD baseline so SVD residuals match across GH host CPUs.
-      NPY_DISABLE_CPU_FEATURES: "AVX512F AVX512CD AVX512_SKX AVX512_CLX AVX512_CNL AVX512_ICL AVX512_BF16"
     steps:
       - uses: actions/checkout@v4
 

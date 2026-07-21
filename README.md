@@ -14,7 +14,7 @@ Distributed ledgers give diamond provenance systems tamper-evident records, but 
 | `pl_gate_acc` | 0.9978750000000001 |
 | `lab_admitted` / `lab_n` | 200 / 200 |
 | `G_for_128` | 22 |
-| `vault_choice` | C=10000, D=8, sec=90.16602947289002, unlock=0.9699112511799476 |
+| `vault_choice` | C=10000, D=8, sec=90.16602947289002, unlock=0.9700447419773197 |
 
 ## Quickstart
 
@@ -36,7 +36,7 @@ The harness is pure NumPy + Matplotlib (no SciPy, no scikit-learn). A single RNG
 RNG = np.random.default_rng(20260721)
 ```
 
-Dependencies are pinned in `requirements.txt` to `numpy==2.4.4` and `matplotlib==3.10.8` on **Python 3.12**. LAPACK version differences across BLAS backends can shift eigendecomposition sign conventions in the PCA/LDA stage, so exact reproduction assumes the pinned stack. Set BLAS to a single thread (`OPENBLAS_NUM_THREADS=1`, and the analogous OpenMP/MKL/Accelerate caps) and disable advanced CPU features via `NPY_DISABLE_CPU_FEATURES` so SVD in the registration stage is deterministic across GitHub host CPUs; the Makefile and CI workflow do this automatically. CI re-runs `scripts/verify.py` on every push and pull request and asserts the headline values above within absolute tolerance `1e-9`.
+Dependencies are pinned in `requirements.txt` to `numpy==2.4.4` and `matplotlib==3.10.8` on **Python 3.12**. LAPACK version differences across BLAS backends can shift eigendecomposition sign conventions in the PCA/LDA stage, so exact reproduction assumes the pinned stack. Set BLAS to a single thread (`OPENBLAS_NUM_THREADS=1`, and the analogous OpenMP/MKL/Accelerate caps) so SVD in the registration stage is deterministic; the Makefile and CI workflow do this automatically. The reference unlock is taken from ubuntu-22.04 + the pinned wheel stack (Apple Accelerate differs slightly). CI re-runs `scripts/verify.py` on every push and pull request and asserts the headline values above within absolute tolerance `1e-9`.
 
 ## Repo layout
 
