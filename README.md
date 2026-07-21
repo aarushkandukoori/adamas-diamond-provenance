@@ -28,6 +28,17 @@ make all
 
 `make all` runs the simulation (`make sim`), builds the paper with `pdflatex` ×3 (`make paper`), and checks headline numbers (`make verify`). Simulation runtime is ~65 seconds single-threaded.
 
+## Demo
+
+Cinematic explainer (GitHub Pages — project site only, not on aarushkandukoori.com):
+
+**https://aarushkandukoori.github.io/adamas-diamond-provenance/**
+
+```bash
+cd demo && python3 -m http.server 8765
+# open http://127.0.0.1:8765
+```
+
 ## Reproducibility
 
 The harness is pure NumPy + Matplotlib (no SciPy, no scikit-learn). A single RNG seed is fixed at process start:
