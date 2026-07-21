@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "ADAMAS: Cryptographically Binding a Diamond's Physical Signature to Its On-Chain Provenance"
+authors:
+  - family-names: Kandukoori
+    given-names: Aarush
+    email: akandukoori@andrew.cmu.edu
+    affiliation: "School of Computer Science, Carnegie Mellon University"
+version: "0.1.0"
+date-released: "2026-07-21"
+license: MIT
+repository-code: "https://github.com/aarushkandukoori/adamas-diamond-provenance"
+abstract: >-
+  Distributed ledgers give diamond provenance systems tamper-evident records
+  but do not bind those records to physical stones. ADAMAS derives a
+  cryptographic key from a stone's crystallographic defect structure so that
+  possession of the physical stone is a prerequisite for every provenance
+  operation. This repository packages the paper, simulation harness, and
+  bit-exact verification artifacts.
+keywords:
+  - diamond provenance
+  - fuzzy vault
+  - cryptographic binding
+  - reproducibility
