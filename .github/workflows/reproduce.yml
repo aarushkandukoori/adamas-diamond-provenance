@@ -3,7 +3,6 @@ name: reproduce
 on:
   push:
   pull_request:
-  workflow_dispatch:
 
 jobs:
   verify:
@@ -15,6 +14,8 @@ jobs:
       NUMEXPR_NUM_THREADS: "1"
       VECLIB_MAXIMUM_THREADS: "1"
       PYTHONHASHSEED: "0"
+      # Force a common SIMD baseline so SVD residuals match across GH host CPUs.
+      NPY_DISABLE_CPU_FEATURES: "AVX512F AVX512CD AVX512_SKX AVX512_CLX AVX512_CNL AVX512_ICL AVX512_BF16"
     steps:
       - uses: actions/checkout@v4
 
@@ -24,16 +25,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-          python -c "import numpy as np; np.show_config()"
+        run: pip install -r requirements.txt
 
       - name: Bit-exact verification
         run: python scripts/verify.py
-
-      - name: Upload results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: results-fresh
-          path: results/results.json
