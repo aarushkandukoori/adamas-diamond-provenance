@@ -7,6 +7,13 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    env:
+      # Bit-exact SVD / eigendecomposition requires single-threaded BLAS.
+      OPENBLAS_NUM_THREADS: "1"
+      OMP_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      NUMEXPR_NUM_THREADS: "1"
+      VECLIB_MAXIMUM_THREADS: "1"
     steps:
       - uses: actions/checkout@v4
 
@@ -20,10 +27,3 @@ jobs:
 
       - name: Bit-exact verification
         run: python scripts/verify.py
-
-      - name: Upload results on failure
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: results-fresh
-          path: results/results.json

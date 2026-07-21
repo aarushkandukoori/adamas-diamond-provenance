@@ -1,6 +1,12 @@
 PYTHON ?= python3.12
 REPO_ROOT := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 export PATH := $(HOME)/Library/TinyTeX/bin/universal-darwin:/Library/TeX/texbin:$(PATH)
+# Single-threaded BLAS for bit-exact eigendecomposition / SVD.
+export OPENBLAS_NUM_THREADS ?= 1
+export OMP_NUM_THREADS ?= 1
+export MKL_NUM_THREADS ?= 1
+export NUMEXPR_NUM_THREADS ?= 1
+export VECLIB_MAXIMUM_THREADS ?= 1
 
 .PHONY: all sim paper verify clean
 
