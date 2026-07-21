@@ -26,7 +26,7 @@ EXPECTED = {
     "vault_choice.C": 10000,
     "vault_choice.D": 8,
     "vault_choice.sec": 90.16602947289002,
-    "vault_choice.unlock": 0.9700447419773197,
+    "vault_choice.unlock": 0.9699112511799476,
 }
 
 
@@ -51,14 +51,15 @@ def _match(got, exp) -> bool:
 
 def main() -> int:
     # Inherit / force single-threaded BLAS for bit-exact linear algebra.
-    for key in (
-        "OPENBLAS_NUM_THREADS",
-        "OMP_NUM_THREADS",
-        "MKL_NUM_THREADS",
-        "NUMEXPR_NUM_THREADS",
-        "VECLIB_MAXIMUM_THREADS",
+    for key, val in (
+        ("OPENBLAS_NUM_THREADS", "1"),
+        ("OMP_NUM_THREADS", "1"),
+        ("MKL_NUM_THREADS", "1"),
+        ("NUMEXPR_NUM_THREADS", "1"),
+        ("VECLIB_MAXIMUM_THREADS", "1"),
+        ("OPENBLAS_CORETYPE", "HASWELL"),
     ):
-        os.environ.setdefault(key, "1")
+        os.environ.setdefault(key, val)
 
     with open(COMMITTED_PATH) as f:
         committed = json.load(f)

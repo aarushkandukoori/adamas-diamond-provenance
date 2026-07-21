@@ -7,30 +7,20 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    # Fixed userland so LAPACK/OpenBLAS kernels match across GitHub host CPUs.
+    container: python:3.12.8-bookworm
     env:
-      # Bit-exact SVD / eigendecomposition requires single-threaded BLAS.
       OPENBLAS_NUM_THREADS: "1"
       OMP_NUM_THREADS: "1"
       MKL_NUM_THREADS: "1"
       NUMEXPR_NUM_THREADS: "1"
       VECLIB_MAXIMUM_THREADS: "1"
+      OPENBLAS_CORETYPE: "HASWELL"
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python 3.12
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install --no-cache-dir -r requirements.txt
 
       - name: Bit-exact verification
         run: python scripts/verify.py
-
-      - name: Upload results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: results-fresh
-          path: results/results.json
