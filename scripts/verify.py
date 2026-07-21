@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -49,6 +50,16 @@ def _match(got, exp) -> bool:
 
 
 def main() -> int:
+    # Inherit / force single-threaded BLAS for bit-exact linear algebra.
+    for key in (
+        "OPENBLAS_NUM_THREADS",
+        "OMP_NUM_THREADS",
+        "MKL_NUM_THREADS",
+        "NUMEXPR_NUM_THREADS",
+        "VECLIB_MAXIMUM_THREADS",
+    ):
+        os.environ.setdefault(key, "1")
+
     with open(COMMITTED_PATH) as f:
         committed = json.load(f)
 
@@ -57,6 +68,7 @@ def main() -> int:
         [sys.executable, str(SIM)],
         cwd=str(ROOT),
         check=False,
+        env=os.environ.copy(),
     )
     if proc.returncode != 0:
         print(f"Simulation exited with code {proc.returncode}", file=sys.stderr)

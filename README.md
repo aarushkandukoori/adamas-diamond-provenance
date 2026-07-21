@@ -36,7 +36,7 @@ The harness is pure NumPy + Matplotlib (no SciPy, no scikit-learn). A single RNG
 RNG = np.random.default_rng(20260721)
 ```
 
-Dependencies are pinned in `requirements.txt` to `numpy==2.4.4` and `matplotlib==3.10.8` on **Python 3.12**. LAPACK version differences across BLAS backends can shift eigendecomposition sign conventions in the PCA/LDA stage, so exact reproduction assumes the pinned stack. CI re-runs `scripts/verify.py` on every push and pull request and asserts the headline values above within absolute tolerance `1e-9`.
+Dependencies are pinned in `requirements.txt` to `numpy==2.4.4` and `matplotlib==3.10.8` on **Python 3.12**. LAPACK version differences across BLAS backends can shift eigendecomposition sign conventions in the PCA/LDA stage, so exact reproduction assumes the pinned stack. Set BLAS to a single thread (`OPENBLAS_NUM_THREADS=1`, and the analogous OpenMP/MKL/Accelerate caps) so SVD in the registration stage is deterministic; the Makefile and CI workflow do this automatically. CI re-runs `scripts/verify.py` on every push and pull request and asserts the headline values above within absolute tolerance `1e-9`.
 
 ## Repo layout
 
