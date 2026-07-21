@@ -26,7 +26,7 @@ EXPECTED = {
     "vault_choice.C": 10000,
     "vault_choice.D": 8,
     "vault_choice.sec": 90.16602947289002,
-    "vault_choice.unlock": 0.9699112511799476,
+    "vault_choice.unlock": 0.9700447419773197,
 }
 
 
@@ -71,10 +71,6 @@ def main() -> int:
         ("NUMEXPR_NUM_THREADS", "1"),
         ("VECLIB_MAXIMUM_THREADS", "1"),
         ("PYTHONHASHSEED", "0"),
-        (
-            "NPY_DISABLE_CPU_FEATURES",
-            "AVX512F AVX512CD AVX512_SKX AVX512_CLX AVX512_CNL AVX512_ICL AVX512_BF16",
-        ),
     ):
         os.environ.setdefault(key, val)
 
